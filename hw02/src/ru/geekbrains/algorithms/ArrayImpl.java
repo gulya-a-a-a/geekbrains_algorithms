@@ -1,7 +1,7 @@
 package ru.geekbrains.algorithms;
 
 public class ArrayImpl<T extends Object & Comparable<? super T>> {
-    static final int MAX_CAPACITY = 1000000;
+    static final int MAX_CAPACITY = 100000;
     static final int NOT_FOUND = -1;
     private T[] mData;
 
@@ -9,7 +9,7 @@ public class ArrayImpl<T extends Object & Comparable<? super T>> {
     private boolean isSorted;
 
     public ArrayImpl() {
-        mData = (T[]) new Object[MAX_CAPACITY];
+        mData = (T[]) new Object[MAX_CAPACITY + 1];
     }
 
     public <T> T[] getData() {
@@ -27,7 +27,14 @@ public class ArrayImpl<T extends Object & Comparable<? super T>> {
     }
 
     public void add(T value) {
-        add(size++, value);
+        add(size, value);
+        size++;
+        isSorted = false;
+    }
+
+    public void resetData() {
+        mData = (T[]) new Object[MAX_CAPACITY + 1];
+        size = 0;
     }
 
     public void set(int position, T value) {
@@ -71,6 +78,7 @@ public class ArrayImpl<T extends Object & Comparable<? super T>> {
         checkIndex(position);
         T removed = mData[position];
         System.arraycopy(mData, position + 1, mData, position, size - position);
+        size--;
         return removed;
     }
 
