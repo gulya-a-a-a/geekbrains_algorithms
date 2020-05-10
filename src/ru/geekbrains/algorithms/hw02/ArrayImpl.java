@@ -1,4 +1,4 @@
-package ru.geekbrains.algorithms;
+package ru.geekbrains.algorithms.hw02;
 
 public class ArrayImpl<T extends Object & Comparable<? super T>> {
     static final int MAX_CAPACITY = 100000;
