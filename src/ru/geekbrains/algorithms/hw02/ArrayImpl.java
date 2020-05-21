@@ -1,7 +1,7 @@
 package ru.geekbrains.algorithms.hw02;
 
 public class ArrayImpl<T extends Object & Comparable<? super T>> {
-    static final int MAX_CAPACITY = 100000;
+    static final int MAX_CAPACITY = 10000;
     static final int NOT_FOUND = -1;
     private T[] mData;
 
@@ -19,6 +19,21 @@ public class ArrayImpl<T extends Object & Comparable<? super T>> {
     public T get(int position) {
         checkIndex(position);
         return (T) mData[position];
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        ArrayImpl<T> other = new ArrayImpl<>();
+        other.mData = (T[]) new Object[this.mData.length];
+        for (int i = 0; i < this.mData.length; i++) {
+            other.mData[i] = mData[i];
+        }
+//        System.arraycopy(this.mData, 0, other.mData, 0, this.mData.length);
+        return other;
+    }
+
+    public void copy(ArrayImpl<T> other) {
+
     }
 
     public void add(int position, T value) {
